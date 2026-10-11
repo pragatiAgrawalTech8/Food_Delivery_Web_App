@@ -9,4 +9,5 @@
 .header-wrapper ul li {
     padding: 5px;
     list-style-type: none;
+    text-decoration: none;
 }
