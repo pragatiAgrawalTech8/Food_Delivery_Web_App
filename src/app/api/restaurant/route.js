@@ -18,9 +18,21 @@ export async function GET() {
 }
 
 export async function POST(request){
-  await connectDB(); 
-  let payload = await request.json()
-  console.log(payload);
-  const restaurant = await restaurantSchema.create(payload)
-    return NextResponse.json({result:true,data:restaurant})
+  try{
+
+    await connectDB(); 
+    let payload = await request.json()
+    console.log(payload);
+    const restaurant = await restaurantSchema.create(payload)
+      return NextResponse.json({
+        success:true,
+        data:restaurant,
+        message: "Restaurant registered successfully"})
+  } catch(error){
+     console.error("POST error:", error);
+    return NextResponse.json(
+      { success: false, error: error.message },
+      { status: 500 }
+    );
+  }
 }
