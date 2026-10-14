@@ -22,17 +22,24 @@ export async function POST(request) {
     await connectDB();
     let payload = await request.json();
     let result;
-
+    let success=false
     if (payload.login) {
       // 🔐 Login flow
       result = await restaurantSchema.findOne({
         email: payload.email,
         password: payload.password
       });
+      if(result){
+        success=true
+      }
     } else {
       // 📝 Signup flow
       const restaurant = new restaurantSchema(payload);
       result = await restaurant.save();
+      if(result){
+        
+        success=true
+      }
     }
 
     return NextResponse.json({data:result, success: true });
