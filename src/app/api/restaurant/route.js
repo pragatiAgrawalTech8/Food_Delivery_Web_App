@@ -17,19 +17,27 @@ export async function GET() {
   }
 }
 
-export async function POST(request){
-  try{
+export async function POST(request) {
+  try {
+    await connectDB();
+    let payload = await request.json();
+    let result;
 
-    await connectDB(); 
-    let payload = await request.json()
-    console.log(payload);
-    const restaurant = await restaurantSchema.create(payload)
-      return NextResponse.json({
-        success:true,
-        data:restaurant,
-        message: "Restaurant registered successfully"})
-  } catch(error){
-     console.error("POST error:", error);
+    if (payload.login) {
+      // 🔐 Login flow
+      result = await restaurantSchema.findOne({
+        email: payload.email,
+        password: payload.password
+      });
+    } else {
+      // 📝 Signup flow
+      const restaurant = new restaurantSchema(payload);
+      result = await restaurant.save();
+    }
+
+    return NextResponse.json({data:result, success: true });
+
+  } catch (error) {
     return NextResponse.json(
       { success: false, error: error.message },
       { status: 500 }

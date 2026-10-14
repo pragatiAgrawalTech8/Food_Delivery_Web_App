@@ -1,0 +1,4 @@
+prag90987_db_user
+uYzQomDYL77Lnrap
+mongodb+srv://<db_username>:uYzQomDYL77Lnrap@cluster0.z5fjl75.mongodb.net/
+mongodb+srv://prag90987_db_user:<db_password>@cluster0.z5fjl75.mongodb.net/?appName=Cluster0

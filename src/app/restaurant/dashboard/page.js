@@ -5,7 +5,7 @@ const dashboard = () => {
   return (
     <>
     <RestaurantHeader />
-    <div>welcom to dashboard</div>
+    <div>welcome to dashboard</div>
     </>
   )
 }
