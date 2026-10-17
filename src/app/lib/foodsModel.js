@@ -5,7 +5,7 @@ const foodModel = new mongoose.Schema({
     price:Number,
     path:String,
     description:String,
-    food_id:mongoose.Schema.Types.ObjectId
+    resto_id:mongoose.Schema.Types.ObjectId
 })
 
 export const foodSchema = mongoose.models.foods || mongoose.model("foods",foodModel)
