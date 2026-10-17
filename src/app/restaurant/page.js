@@ -4,7 +4,7 @@ import RestaurantSignup from "../_components/RestaurantSignup";
 import RestaurantHeader from "../_components/RestaurantHeader";
 import RestaurantFooter from "../_components/RestaurantFooter";
 import {useState} from "react"
-import "./style.css"
+// import "./style.css"
 const Restaurant =()=>{
     const [login,setLogin] =  useState(true)
     return (

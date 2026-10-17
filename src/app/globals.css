@@ -27,3 +27,10 @@
   width: 100%;
   text-align: center;
 }
+.input-error{
+    position: absolute;
+    padding: 8px;
+    font-size: 13px;
+    color: red;
+    
+}

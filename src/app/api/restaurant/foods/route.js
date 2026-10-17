@@ -7,11 +7,13 @@ export async function POST(request) {
     await connectDB()
     const payload = await request.json()
     console.log("Food payload:", payload)
-
+    let success = false
     const food = new foodSchema(payload)
     const result = await food.save()
-
-    return NextResponse.json({ success: true, data: result })
+    if(result){
+      success=true
+    }
+    return NextResponse.json({ success, data: result })
 
   } catch (error) {
     console.error("POST error:", error)
