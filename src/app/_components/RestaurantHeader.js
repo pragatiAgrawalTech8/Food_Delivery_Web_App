@@ -3,7 +3,7 @@ import Link from "next/link"
 import {useRouter,usePathname} from "next/navigation"
 import {useEffect,useState} from "react"
 const RestaurantHeader = () => {
-  const [details,setDetails] = useState()
+  const [details,setDetails] = useState(null)
   const router = useRouter()
   const pathName = usePathname()
 
@@ -14,10 +14,10 @@ const RestaurantHeader = () => {
     } else if(data && pathName == "/restaurant"){
       router.push("/restaurant/dashboard")
     }
-    else{
+    else if(data){
       setDetails(JSON.parse(data))
     }
-  },[])
+  },[pathName])
   const logout=()=>{
     localStorage.removeItem("restaurantUser")
     router.push("/restaurant")
@@ -33,10 +33,10 @@ const RestaurantHeader = () => {
                 {
                     details && details.name?
                     <> 
-                    <li><Link href="/">Profile</Link></li>
+                    <li><Link href="/restaurant/dashboard">Profile</Link></li>
                     <li><button onClick={logout}>Logout</button></li>
                     </>
-                    :<li><Link href="/">Login/SignUp</Link></li>
+                    :<li><Link href="/restaurant">Login/SignUp</Link></li>
                 }
         </ul>
     </div>

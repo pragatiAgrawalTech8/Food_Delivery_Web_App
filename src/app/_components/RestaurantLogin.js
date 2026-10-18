@@ -1,33 +1,44 @@
 import { useState } from "react"
 import { useRouter } from "next/navigation"
 
-const restaurantLogin = () => {
-  const [email, setEmail] = useState()
+const RestaurantLogin = () => {
+  const [email, setEmail] = useState("")
   const [password, setPassword] = useState()
   const [error, setError] = useState(false)
   const router = useRouter()
 
   async function handleChange() {
-    if (!email || !password) {
-      setError(true)
-      return false
-    } else {
-      setError(false)
-    }
-    // console.log(email,password);
-    let response = await fetch("http://localhost:3000/api/restaurant", {
+  if (!email || !password) {
+    setError(true)
+    return false
+  } else {
+    setError(false)
+  }
+
+  try {
+    let response = await fetch("/api/restaurant", {  
       method: "POST",
+      headers: {
+        "Content-Type": "application/json" 
+      },
       body: JSON.stringify({ email, password, login: true })
     })
-    response = await response.json()
-    if (response.success) {
-      const { password: _pwd, ...safeData } = response.data
-      localStorage.setItem("restaurantUser", JSON.stringify(safeData))
+    
+    let result = await response.json()                // ✅ result वेरिएबल में सेव किया
+    console.log("Login Response:", result)
+    if (result.success && result.data) {
+      let userData = result.data;
+      delete userData.password; 
+      localStorage.setItem("restaurantUser", JSON.stringify(userData))
       router.push("/restaurant/dashboard")
     } else {
-      alert("Login failed")
+      alert("Login failed: Invalid credentials")
     }
+  } catch (error) {
+    console.error(error);
+    alert("Network error")
   }
+}
 
   return (
     <>
@@ -51,4 +62,4 @@ const restaurantLogin = () => {
   )
 }
 
-export default restaurantLogin
+export default RestaurantLogin
