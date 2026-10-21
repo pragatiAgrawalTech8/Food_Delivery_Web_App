@@ -34,3 +34,11 @@
     color: red;
     
 }
+table, th,td{
+  border: 2px solid black;
+  border-collapse: collapse;
+  padding: 10px;
+}
+table td button{
+  margin: 5px;
+}

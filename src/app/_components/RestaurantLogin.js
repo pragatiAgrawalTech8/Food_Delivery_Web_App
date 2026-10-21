@@ -3,7 +3,7 @@ import { useRouter } from "next/navigation"
 
 const RestaurantLogin = () => {
   const [email, setEmail] = useState("")
-  const [password, setPassword] = useState()
+  const [password, setPassword] = useState("")
   const [error, setError] = useState(false)
   const router = useRouter()
 

@@ -3,6 +3,7 @@ import RestaurantHeader from "@/app/_components/RestaurantHeader";
 import AddFoodItem from "@/app/_components/AddFoodItem";
 import "./../style.css"
 import {useState} from "react"
+import FoodItemList from "@/app/_components/FoodItemList"
 const dashboard = () => {
   const [addItem,setAddItem] = useState(false)
   return (
@@ -11,7 +12,7 @@ const dashboard = () => {
     <button onClick={()=>setAddItem(true)}>Add Food</button>
     <button onClick={()=>setAddItem(false)}>Dashboard</button>
     {
-      addItem ? <AddFoodItem /> : <div>welcome to dashboard</div>
+      addItem ? <AddFoodItem /> : <FoodItemList />
     }
     
     

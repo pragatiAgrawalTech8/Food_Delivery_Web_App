@@ -31,7 +31,7 @@ const RestaurantHeader = () => {
             <li><Link href="/">Home</Link></li>
            
                 {
-                    details && details.name?
+                    details && details.data.name?
                     <> 
                     <li><Link href="/restaurant/dashboard">Profile</Link></li>
                     <li><button onClick={logout}>Logout</button></li>
