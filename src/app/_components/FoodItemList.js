@@ -19,6 +19,19 @@ const FoodItemList = () => {
             alert("food item list not loading")
         }
     }
+
+    const deleteFoodItem=async(id)=>{
+        let response = await fetch("http://localhost:3000/api/restaurant/foods/"+id,{
+            method:"delete"
+        })
+        response = await response.json()
+        if(response.success){
+            loadFoodItems()
+        } else{
+            alert("food item not deleted")
+        }
+    }
+
     return (
         <div>
             <h1>Food Item</h1>
@@ -42,7 +55,7 @@ const FoodItemList = () => {
                         <td>{item.price}</td>
                         <td>{item.description}</td>
                         <td>{item.image}</td>
-                        <td><button>Delete</button><button>Edit</button></td>
+                        <td><button onClick={()=>deleteFoodItem(item._id)}>Delete</button><button>Edit</button></td>
                     </tr>
                     ))
                 }
