@@ -30,13 +30,25 @@ const EditFoodItem = (props) => {
         if(!name || !price || !path || !description){
           setError(true)
           return false
+        } else{
+          console.log(name,price,path,description);
+        }
+        let response = await fetch("http://localhost:3000/api/restaurant/foods/edit/"+id,{
+          method:"PUT",
+          body:JSON.stringify({name,price,path,description})
+        }) 
+        response = await response.json()
+        if(response.success){
+          router.push("../dashboard")
+        } else{
+          alert("Data is not updated please try again")
         }
        
     }
 
   return (
     <div className="container">
-        <h1>Update food item</h1>
+        <h1>Edit food item</h1>
         <div  className="input-wrapper"> 
         <input type="text" placeholder="enter food name" className="input-field"
          value={name} onChange={(e)=>setName(e.target.value)}/>
